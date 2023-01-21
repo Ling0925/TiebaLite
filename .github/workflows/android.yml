@@ -28,6 +28,6 @@ jobs:
       uses: actions/download-artifact@v3.0.2
       with:
         # Artifact name
-        name: 
+        name: tiebalite.apk
         # Destination path
-        path: # optional
+        path: ./app/build/outputs/apk/
