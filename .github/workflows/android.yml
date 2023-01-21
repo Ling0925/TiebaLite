@@ -24,10 +24,6 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v3.0.2
-      with:
-        # Artifact name
-        name: tiebalite.apk
-        # Destination path
-        path: ./app/build/outputs/apk/
+      
+    - name: GH Release
+      uses: softprops/action-gh-release@v0.1.15
