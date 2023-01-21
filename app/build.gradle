@@ -53,7 +53,7 @@ andResGuard {
     // sevenzip {
     //     artifact = 'com.tencent.mm:SevenZip:1.2.10'
     // }
-    finalApkBackupPath = "${project.rootDir}/app/release/${applicationVersionName}(${applicationVersionCode}).apk"
+    finalApkBackupPath = "${project.rootDir}/app/debug/tiebalite.apk"
     digestalg = "SHA-256"
 }
 
