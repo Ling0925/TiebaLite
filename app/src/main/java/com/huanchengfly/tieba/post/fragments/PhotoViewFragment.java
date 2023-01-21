@@ -179,6 +179,7 @@ public class PhotoViewFragment extends BaseFragment {
     }
 
     private float getInitImageScale(Bitmap bitmap) {
+
         int width = BaseApplication.ScreenInfo.EXACT_SCREEN_WIDTH;
         int height = BaseApplication.ScreenInfo.EXACT_SCREEN_HEIGHT;
         float scale = 1.0f;
@@ -202,7 +203,12 @@ public class PhotoViewFragment extends BaseFragment {
         if (dw > width && dh > height) {
             scale = width * 1.0f / dw;
         }
+        // 图片高度和宽度都小于屏幕，且放大1.5倍后依旧小于屏幕，则放大图片至1.5倍，避免小图放大倍数过高
+        if (dw < width && dh < height && (dh * 1.5 < height || dw * 1.5 < width)) {
+            scale = 1.5f;
+        }
         return scale;
+
     }
 
     @Override

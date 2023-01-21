@@ -16,25 +16,25 @@ buildscript {
     }
 }
 
-def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(rootProject.file("keystore.properties")))
-def applicationProperties = new Properties()
-applicationProperties.load(new FileInputStream(rootProject.file("application.properties")))
-def SHA1 = System.getenv("CIRCLE_SHA1")
-def applicationVersionCode = applicationProperties["versionCode"].toInteger()
-def applicationVersionName = applicationProperties["versionName"]
-def isPerVersion = applicationProperties["isPerRelease"] == "true"
-if (SHA1 != null) {
-    applicationVersionName = applicationVersionName + ".${SHA1.substring(0, 7)}"
-}
-if (isPerVersion) {
-    applicationVersionName = applicationVersionName + ".${applicationProperties["preReleaseName"]}-${applicationProperties["preReleaseVer"]}"
-}
+// def keystoreProperties = new Properties()
+// keystoreProperties.load(new FileInputStream(rootProject.file("keystore.properties")))
+// def applicationProperties = new Properties()
+// applicationProperties.load(new FileInputStream(rootProject.file("application.properties")))
+// def SHA1 = System.getenv("CIRCLE_SHA1")
+// def applicationVersionCode = applicationProperties["versionCode"].toInteger()
+// def applicationVersionName = applicationProperties["versionName"]
+// def isPerVersion = applicationProperties["isPerRelease"] == "true"
+// if (SHA1 != null) {
+//     applicationVersionName = applicationVersionName + ".${SHA1.substring(0, 7)}"
+// }
+// if (isPerVersion) {
+//     applicationVersionName = applicationVersionName + ".${applicationProperties["preReleaseName"]}-${applicationProperties["preReleaseVer"]}"
+// }
 
 andResGuard {
     mappingFile = null
     use7zip = true
-    useSign = true
+    useSign = false
     keepRoot = false
     mergeDuplicatedRes = true
     whiteList = ["R.mipmap.ic_launcher",
@@ -58,15 +58,15 @@ andResGuard {
 }
 
 android {
-    signingConfigs {
-        release {
-            keyAlias keystoreProperties['releaseKeyAlias']
-            keyPassword keystoreProperties['releaseKeyPassword']
-            storeFile file(rootDir.getCanonicalPath() + '/' + keystoreProperties['releaseKeyStore'])
-            storePassword keystoreProperties['releaseStorePassword']
-            v2SigningEnabled true
-        }
-    }
+    // signingConfigs {
+    //     release {
+    //         keyAlias keystoreProperties['releaseKeyAlias']
+    //         keyPassword keystoreProperties['releaseKeyPassword']
+    //         storeFile file(rootDir.getCanonicalPath() + '/' + keystoreProperties['releaseKeyStore'])
+    //         storePassword keystoreProperties['releaseStorePassword']
+    //         v2SigningEnabled true
+    //     }
+    // }
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.huanchengfly.tieba.post"
@@ -85,6 +85,15 @@ android {
             debuggable false
             jniDebuggable false
             signingConfig signingConfigs.release
+            zipAlignEnabled true
+            multiDexEnabled true
+        }
+         debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable true
+            jniDebuggable false
+            signingConfig signingConfigs.debug
             zipAlignEnabled true
             multiDexEnabled true
         }
