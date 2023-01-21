@@ -28,4 +28,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: TiebaLite artifact
-        path: ./app/build/ # or path/to/artifact
+        path: ./app/build/outputs/apk/ # or path/to/artifact
