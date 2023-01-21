@@ -78,16 +78,16 @@ android {
         project.ext.set("archivesBaseName",  "${versionName}(${versionCode})".toString())
     }
     buildTypes {
-        release {
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            debuggable false
-            jniDebuggable false
-            signingConfig signingConfigs.release
-            zipAlignEnabled true
-            multiDexEnabled true
-        }
+        // release {
+        //     minifyEnabled true
+        //     shrinkResources true
+        //     proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        //     debuggable false
+        //     jniDebuggable false
+        //     signingConfig signingConfigs.release
+        //     zipAlignEnabled true
+        //     multiDexEnabled true
+        // }
          debug {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
