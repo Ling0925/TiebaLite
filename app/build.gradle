@@ -18,22 +18,22 @@ buildscript {
 
 // def keystoreProperties = new Properties()
 // keystoreProperties.load(new FileInputStream(rootProject.file("keystore.properties")))
-// def applicationProperties = new Properties()
-// applicationProperties.load(new FileInputStream(rootProject.file("application.properties")))
+def applicationProperties = new Properties()
+applicationProperties.load(new FileInputStream(rootProject.file("application.properties")))
 // def SHA1 = System.getenv("CIRCLE_SHA1")
-// def applicationVersionCode = applicationProperties["versionCode"].toInteger()
-// def applicationVersionName = applicationProperties["versionName"]
-// def isPerVersion = applicationProperties["isPerRelease"] == "true"
+def applicationVersionCode = applicationProperties["versionCode"].toInteger()
+def applicationVersionName = applicationProperties["versionName"]
+def isPerVersion = applicationProperties["isPerRelease"] == "true"
 // if (SHA1 != null) {
 //     applicationVersionName = applicationVersionName + ".${SHA1.substring(0, 7)}"
 // }
-// if (isPerVersion) {
-//     applicationVersionName = applicationVersionName + ".${applicationProperties["preReleaseName"]}-${applicationProperties["preReleaseVer"]}"
-// }
+if (isPerVersion) {
+    applicationVersionName = applicationVersionName + ".${applicationProperties["preReleaseName"]}-${applicationProperties["preReleaseVer"]}"
+}
 
 andResGuard {
     mappingFile = null
-    use7zip = true
+    use7zip = false
     useSign = false
     keepRoot = false
     mergeDuplicatedRes = true
@@ -50,9 +50,9 @@ andResGuard {
                            "*.webp",
                            "*.kotlin_metadata",
                            "resources.arsc"]
-    sevenzip {
-        artifact = 'com.tencent.mm:SevenZip:1.2.10'
-    }
+    // sevenzip {
+    //     artifact = 'com.tencent.mm:SevenZip:1.2.10'
+    // }
     finalApkBackupPath = "${project.rootDir}/app/release/${applicationVersionName}(${applicationVersionCode}).apk"
     digestalg = "SHA-256"
 }
@@ -99,8 +99,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_11
+        sourceCompatibility JavaVersion.VERSION_1_11
     }
     buildToolsVersion '28.0.3'
 }
