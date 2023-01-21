@@ -76,7 +76,7 @@ class SettingsFragment : PreferencesFragment() {
         }
         findPreference<Preference>("clear_search_history")!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             SearchHistoryTable(attachContext).clearDatabase()
-            if (view != null) Util.createSnackbar(view!!, R.string.toast_clear_success, Snackbar.LENGTH_SHORT).show()
+            if (view != null) Util.createSnackbar(requireView() , R.string.toast_clear_success, Snackbar.LENGTH_SHORT).show()
             true
         }
         findPreference<Preference>("exit_account")!!.isEnabled = AccountUtil.isLoggedIn(attachContext)
@@ -132,7 +132,7 @@ class SettingsFragment : PreferencesFragment() {
         clearCache!!.summary = attachContext.getString(R.string.tip_cache, GlideCacheUtil.getInstance().getCacheSize(attachContext))
         clearCache.onPreferenceClickListener = Preference.OnPreferenceClickListener { preference: Preference ->
             GlideCacheUtil.getInstance().clearImageAllCache(attachContext)
-            if (view != null) Util.createSnackbar(view!!, R.string.toast_clear_cache_success, Snackbar.LENGTH_SHORT).show()
+            if (view != null) Util.createSnackbar(requireView() , R.string.toast_clear_cache_success, Snackbar.LENGTH_SHORT).show()
             preference.summary = attachContext.getString(R.string.tip_cache, "0.0B")
             true
         }

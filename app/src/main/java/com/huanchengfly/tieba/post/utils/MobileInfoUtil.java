@@ -16,9 +16,9 @@ public class MobileInfoUtil {
         try {
             TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             String imei = null;
-            if (telephonyManager != null) {
-                imei = telephonyManager.getDeviceId();
-            }
+            // if (telephonyManager != null) {
+            // imei = telephonyManager.getDeviceId();
+            // }
             if (imei == null) {
                 imei = DEFAULT_IMEI;
             }
