@@ -25,10 +25,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
       
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.2
-        with:
-          # Artifact name
-          name: TiebaLite # optional, default is artifact
-          # A file, directory or wildcard pattern that describes what to upload
-          path: ./app/biuld/
+    - uses: actions/upload-artifact@v3
+      with:
+        name: TiebaLite artifact
+        path: ./app/build/debug/tiebalite.apk # or path/to/artifact
